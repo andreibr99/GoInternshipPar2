@@ -1,8 +1,7 @@
-package http
+package datamanager
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -19,38 +18,39 @@ type Data struct {
 }
 
 func ReadData(location string) ([][]string, error) {
+	//Read the JSON data from location
 	resp, err := http.Get(location)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
+	//Convert the JSON to data structure
 	var data Data
 	if err = json.Unmarshal(body, &data); err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
+	//Store the obtained data into a 2D slice
 	result := make([][]string, len(data.Results))
 	for i, v := range data.Results {
 		result[i] = append(result[i], v.First, v.Last, v.Email, v.Address, v.Created, v.Balance)
 	}
-	return result, err
+	return result, nil
 }
 
 func GetData(location string, noOfRecords int) ([][]string, error) {
 	var finalData [][]string
-	gotRecords := 0
-	for noOfRecords > gotRecords {
+	//Call the ReadData() as many times as needed to get the number of records specified
+	for noOfRecords > len(finalData) {
 		data, err := ReadData(location)
 		if err != nil {
-			fmt.Println(err)
 			return nil, err
 		}
-		gotRecords += len(data)
 		finalData = append(finalData, data...)
 	}
 	finalData = finalData[:noOfRecords]
