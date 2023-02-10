@@ -19,7 +19,6 @@ func WriteToFiles(groupedData [][][]string, filesLocation string) error {
 	for _, records := range groupedData {
 		letter := records[0][0][0:1]
 		newRecords := make([]Record, len(records))
-
 		//Convert the records to data structure
 		for j, r := range records {
 			newRecords[j] = Record{
@@ -31,12 +30,6 @@ func WriteToFiles(groupedData [][][]string, filesLocation string) error {
 				Balance: r[5],
 			}
 		}
-
-		//Skip letters with no records
-		if len(newRecords) == 0 {
-			continue
-		}
-
 		//Store JSON data
 		fileData := make(map[string]interface{})
 		fileData["index"] = letter

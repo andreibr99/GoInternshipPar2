@@ -8,7 +8,7 @@ import (
 func main() {
 	location := "https://randomapi.com/api/6de6abfedb24f889e0b5f675edc50deb?fmt=prettyjson&sole"
 	filesLocation := "C:\\Users\\andre\\GolandProjects\\GoInternshipPart2\\jsonfiles"
-	noOfRecords := 75
+	noOfRecords := 100
 
 	err := datamanager.Controller(location, noOfRecords, filesLocation,
 		datamanager.GetData, datamanager.RemoveDuplicates, datamanager.GroupByFirstLetter, datamanager.WriteToFiles)

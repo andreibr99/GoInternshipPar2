@@ -19,10 +19,10 @@ func Controller(
 	fmt.Printf("successfully read %v records\n", len(data))
 
 	filteredData := filter(data)
-	fmt.Println("successfully deleted duplicates")
+	fmt.Println("deleted duplicates")
 
 	groupedData := grouper(filteredData)
-	fmt.Println("successfully grouped data by first name initial")
+	fmt.Println("grouped data by first name initial")
 
 	err = writer(groupedData, filesLocation)
 	if err != nil {
