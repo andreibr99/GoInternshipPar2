@@ -15,9 +15,9 @@ type Record struct {
 	Balance string `json:"balance"`
 }
 
-func WriteToFiles(groupedData [][][]string, dataLocation string) error {
-	for i, records := range groupedData {
-		letter := i + 65
+func WriteToFiles(groupedData [][][]string, filesLocation string) error {
+	for _, records := range groupedData {
+		letter := records[0][0][0:1]
 		newRecords := make([]Record, len(records))
 
 		//Convert the records to data structure
@@ -39,7 +39,7 @@ func WriteToFiles(groupedData [][][]string, dataLocation string) error {
 
 		//Store JSON data
 		fileData := make(map[string]interface{})
-		fileData["index"] = string(rune(letter))
+		fileData["index"] = letter
 		fileData["records"] = newRecords
 		fileData["total_records"] = len(newRecords)
 
@@ -50,7 +50,7 @@ func WriteToFiles(groupedData [][][]string, dataLocation string) error {
 		}
 
 		//Write the JSON data to a file
-		filename := filepath.Join(dataLocation, string(rune(letter))+".json")
+		filename := filepath.Join(filesLocation, letter+".json")
 		file, err := os.Create(filename)
 		if err != nil {
 			return err

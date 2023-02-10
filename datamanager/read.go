@@ -2,6 +2,7 @@ package datamanager
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 )
@@ -17,7 +18,7 @@ type Data struct {
 	} `json:"results"`
 }
 
-func ReadData(location string) ([][]string, error) {
+func readData(location string) ([][]string, error) {
 	//Read the JSON data from location
 	resp, err := http.Get(location)
 	if err != nil {
@@ -35,6 +36,11 @@ func ReadData(location string) ([][]string, error) {
 		return nil, err
 	}
 
+	if len(data.Results) == 0 {
+		err = errors.New("can't get data from empty record")
+		return nil, err
+	}
+
 	//Store the obtained data into a 2D slice
 	result := make([][]string, len(data.Results))
 	for i, v := range data.Results {
@@ -47,7 +53,7 @@ func GetData(location string, noOfRecords int) ([][]string, error) {
 	var finalData [][]string
 	//Call the ReadData() as many times as needed to get the number of records specified
 	for noOfRecords > len(finalData) {
-		data, err := ReadData(location)
+		data, err := readData(location)
 		if err != nil {
 			return nil, err
 		}

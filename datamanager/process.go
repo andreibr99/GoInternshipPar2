@@ -28,5 +28,12 @@ func GroupByFirstLetter(records [][]string) [][][]string {
 			}
 		}
 	}
-	return data
+	// Take only the groups that are not empty
+	var nonEmptyGroups [][][]string
+	for _, group := range data {
+		if len(group) > 0 {
+			nonEmptyGroups = append(nonEmptyGroups, group)
+		}
+	}
+	return nonEmptyGroups
 }
