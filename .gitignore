@@ -24,3 +24,27 @@ go.work
 
 
 !/jsonfiles/
+/jsonfiles/A.json
+/jsonfiles/B.json
+/jsonfiles/C.json
+/jsonfiles/D.json
+/jsonfiles/E.json
+/jsonfiles/F.json
+/jsonfiles/G.json
+/jsonfiles/H.json
+/jsonfiles/I.json
+/jsonfiles/J.json
+/jsonfiles/K.json
+/jsonfiles/L.json
+/jsonfiles/M.json
+/jsonfiles/N.json
+/jsonfiles/O.json
+/jsonfiles/P.json
+/jsonfiles/R.json
+/jsonfiles/S.json
+/jsonfiles/T.json
+/jsonfiles/V.json
+/jsonfiles/W.json
+/jsonfiles/X.json
+/jsonfiles/Y.json
+/jsonfiles/Z.json
