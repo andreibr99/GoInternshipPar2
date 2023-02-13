@@ -15,6 +15,9 @@ type Record struct {
 	Balance string `json:"balance"`
 }
 
+// WriteToFiles receives a 3D slice of strings with the first field being the index for
+// each group of records and a location where the files will be created.
+// It writes one json file for each group in the slice and returns an error if there is one.
 func WriteToFiles(groupedData [][][]string, filesLocation string) error {
 	for _, records := range groupedData {
 		letter := records[0][0][0:1]

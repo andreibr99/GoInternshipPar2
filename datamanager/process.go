@@ -4,6 +4,8 @@ import (
 	"strings"
 )
 
+// RemoveDuplicates receives a 2D slice of strings and filters the duplicate lines,
+// removing them. It returns a 2D slice of strings.
 func RemoveDuplicates(records [][]string) [][]string {
 	occurred := map[string]bool{}
 	var result [][]string
@@ -18,6 +20,9 @@ func RemoveDuplicates(records [][]string) [][]string {
 	return result
 }
 
+// GroupByFirstLetter groups a 2D slice of strings, by the first character of each line.
+// It returns a 3D slice of strings, ignoring the letters that have no entries, the first
+// field of the slice being the index for each letter.
 func GroupByFirstLetter(records [][]string) [][][]string {
 	data := make([][][]string, 26)
 	for i := 0; i < 26; i++ {

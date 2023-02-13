@@ -2,6 +2,19 @@ package datamanager
 
 import "fmt"
 
+// Controller orchestrates the process of reading, filtering, grouping and
+// writing data.
+// It takes 7 parameters:
+//
+//	location: the location of the data to be read.
+//	noOfRecords: the number of records to be read.
+//	filesLocation: the location to store the grouped data.
+//	reader: a function that reads data from the location and returns a 2D slice of strings and an error if there is one.
+//	filter: a function that filters the records and returns a filtered 2D slice of strings.
+//	grouper: a function that groups the filtered data and returns a 3D slice of strings.
+//	writer: a function that writes the grouped data into separate files and returns an error if there is one.
+//
+// The function returns an error if any.
 func Controller(
 	location string,
 	noOfRecords int,

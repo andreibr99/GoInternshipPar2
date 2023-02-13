@@ -49,6 +49,10 @@ func readData(location string) ([][]string, error) {
 	return result, nil
 }
 
+// GetData reads data from a location and receives the number of records that should be read.
+// It calls the readData() func as many times it needs to ensure that it gets the number of lines
+// specified in the input. It returns a 2D slice of strings with the read records and an error if there
+// is one.
 func GetData(location string, noOfRecords int) ([][]string, error) {
 	var finalData [][]string
 	//Call the ReadData() as many times as needed to get the number of records specified
