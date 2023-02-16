@@ -3,6 +3,7 @@ package datamanager
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -27,6 +28,15 @@ func readData(location string) ([][]string, error) {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
+		return nil, err
+	}
+
+	err = resp.Body.Close()
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode > 299 {
+		err = fmt.Errorf("Response failed with status code: %d and\nbody: %s\n", resp.StatusCode, body)
 		return nil, err
 	}
 
